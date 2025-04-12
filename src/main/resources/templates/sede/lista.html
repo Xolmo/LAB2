@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+    <title>Lista Sedes</title>
+</head>
+<body>
+<main>
+    <div class="container px-4 py-5">
+        <h1 class="pb-2 border-bottom">Lista de Sedes</h1>
+        <div class="d-flex mt-3 mb-4">
+            <a class="btn btn-primary" th:href="@{'/sede/new'}">Nueva Sede</a>
+            <a class="btn btn-secondary ms-auto" th:href="@{'/'}">Regresar</a>
+        </div>
+        <table class="table">
+            <thead>
+            <tr>
+                <th>#</th>
+                <th>Distrito</th>
+                <th>Dirección</th>
+                <th></th>
+                <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="sede, info : ${listaSedes}">
+                <td th:text="${info.index + 1}"></td>
+                <td th:text="${sede.getDireccion()}"></td>
+                <td th:text="${sede.getDistrito()}"></td>
+
+                <td><a class="btn btn-primary"
+                       th:href="@{'/sede/edit?id=' + ${sede.getIdSede()}}">Editar</a>
+                </td>
+                <td><a class="btn btn-danger"
+                       th:href="@{'/sede/delete?id=' + ${sede.getIdSede()}}">Borrar</a>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</main>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

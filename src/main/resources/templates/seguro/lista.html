@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}"/>
+  <title>Lista Seguros</title>
+</head>
+<body>
+<main>
+  <div class="container px-4 py-5">
+    <h1 class="pb-2 border-bottom">Lista de Seguros</h1>
+    <div class="d-flex mt-3 mb-4">
+      <a class="btn btn-primary" th:href="@{'/seguro/new'}">Nuevo Seguro</a>
+      <a class="btn btn-secondary ms-auto" th:href="@{'/'}">Regresar</a>
+    </div>
+    <table class="table">
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Empresa Aseguradora</th>
+        <th>Cobertura Máxima</th>
+        <th>Tarifa</th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="seguro, info : ${listaSeguros}">
+        <td th:text="${info.index + 1}"></td>
+        <td th:text="${seguro.getEmpresa_aseguradora()}"></td>
+        <td th:text="${seguro.getCobertura_maxima()}"></td>
+        <td th:text="${seguro.getTarifa()}"></td>
+
+
+        <td><a class="btn btn-primary"
+               th:href="@{'/seguro/edit?id=' + ${seguro.getIdSeguro()}}">Editar</a>
+        </td>
+        <td><a class="btn btn-danger"
+               th:href="@{'/seguro/delete?id=' + ${seguro.getIdSeguro()}}">Borrar</a>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</main>
+<script th:src="@{/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>
